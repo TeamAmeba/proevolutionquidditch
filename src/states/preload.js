@@ -9,7 +9,8 @@ ProEvolutionQuidditch.preloadState.prototype = {
 
     preload: function() {
         
-        game.load.image('loading1','assets/images/text/loading1.png');
+        this.add.sprite(170,230, 'loading1');
+       
         
 
         //Text images
@@ -49,14 +50,16 @@ ProEvolutionQuidditch.preloadState.prototype = {
         game.load.audio('you_win','assets/audio/you_win.ogg');
 
         //Music
-        //game.load.audio('bensound-creepy','assets/audio/bensound-creepy.mp3');
-        //game.load.audio('bensound-epic','assets/audio/bensound-epic.mp3');
-        //game.load.audio('bensound-happyrock','assets/audio/bensound-happyrock.mp3');
+        game.load.audio('bensound-creepy','assets/music/bensound-creepy.mp3');
+        game.load.audio('bensound-epic','assets/music/bensound-epic.mp3');
+        game.load.audio('bensound-happyrock','assets/music/bensound-happyrock.mp3');
 
 
     },
 
     create: function() {
+        var music = game.add.audio('bensound-creepy');
+        music.play();
         game.state.start('menuState');
     },
 
