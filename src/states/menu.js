@@ -62,6 +62,8 @@ ProEvolutionQuidditch.menuState.prototype = {
 
             player1.visible = false;
             press2.visible = false;
+
+            ProEvolutionQuidditch.numPlayer = 2;
         }
         if(game.input.keyboard.isDown(Phaser.Keyboard.ONE)){
             draco.visible = false;
@@ -70,6 +72,8 @@ ProEvolutionQuidditch.menuState.prototype = {
 
             player1.visible = true;
             press2.visible = true;
+
+            ProEvolutionQuidditch.numPlayer = 1;
         }
     }
 
