@@ -1,4 +1,6 @@
-var ProEvolutionQuidditch = {}
+var ProEvolutionQuidditch = {
+    numPlayer: 1
+}
 
 ProEvolutionQuidditch.bootState = function(game) {
 
