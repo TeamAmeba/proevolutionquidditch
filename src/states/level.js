@@ -22,11 +22,15 @@ ProEvolutionQuidditch.levelState.prototype = {
     create: function() {
         game.add.sprite(0,0,'stadium1');
 
+        var griffindor = game.add.sprite(10,10,'griffindor');
+        griffindor.scale.setTo(0.5,0.5);
+
         puntos = 0;
-        puntuacion = game.add.text(20, 20, "puntuacion: " + puntos);
+        puntuacion = game.add.text(100, 20, puntos);
 
         player = game.add.sprite(300, 300, 'harry');
         player.scale.setTo(0.5, 0.5);
+        player.anchor.setTo(0.5, 0.5);
         
         game.physics.enable(player, Phaser.Physics.ARCADE);
 
@@ -42,39 +46,38 @@ ProEvolutionQuidditch.levelState.prototype = {
     },
 
     update: function() {
-        if (upKey.isDown)
+        if (upKey.isDown && player.y > 20)
         {
             player.y-=5;
         }
-        if (downKey.isDown)
+        if (downKey.isDown && player.y < 580)
         {
             player.y+=5;
         }
 
-        if (leftKey.isDown)
+        if (leftKey.isDown && player.x > 20)
         {
             player.x-=5;
-            //player.scale.setTo(-0.5,0.5);
+            player.scale.setTo(-0.5,0.5);
         }
-        if (rightKey.isDown)
+        if (rightKey.isDown && player.x < 780)
         {
             player.x+=5;
-            //player.scale.setTo(0.5, 0.5);
+            player.scale.setTo(0.5, 0.5);
         }
 
-        game.physics.arcade.collide(player, snitch, collisionHandler, null, this);
-    }
+        game.physics.arcade.collide(player, snitch, this.collisionHandler, null, this);
+    },
 
-    
-}
-
-function collisionHandler (player, snitch) {
-    puntos++;
-    puntuacion.text = "puntuacion: " + puntos;
-    if(puntos >= 3){
-        game.state.start('endingState');
-    }else{
-        snitch.x = Math.floor(Math.random() * game.width - snitch.width/2);
-        snitch.y = Math.floor(Math.random() * game.height - snitch.height/2);
+    collisionHandler: function(player, snitch) {
+        puntos++;
+        puntuacion.text = puntos;
+        if(puntos >= 3){
+            game.state.start('endingState');
+        }else{
+            snitch.x = Math.floor(Math.random() * game.width - snitch.width/2);
+            snitch.y = Math.floor(Math.random() * game.height - snitch.height/2);
+        }
     }
 }
+
